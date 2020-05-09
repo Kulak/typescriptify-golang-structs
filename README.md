@@ -1,5 +1,19 @@
 # A Golang JSON to TypeScript model converter
 
+## Fork Difference
+
+This is a termporary fork of <https://github.com/tkrajina/typescriptify-golang-structs>.  Its goal is to provide me with ability to generate all 64 bit numbers as strings ASAP.
+
+The fork will go away when `parent` project adds this work or equivalent feature.
+
+The project's package has been replaced with `kulak` address space for the purpose of using the package properly.
+
+Added function:
+
+```
+	converter.ReplaceBuiltin(reflect.Int64, "string")
+```
+
 ## Installation
 
 The command-line tool:

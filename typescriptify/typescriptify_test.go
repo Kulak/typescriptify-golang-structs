@@ -502,3 +502,33 @@ export class Holliday {
 }`
 	testConverter(t, converter, desiredResult)
 }
+
+type BigNumber struct {
+	Signed    int64  `json:"signed"`
+	Unsigned  uint64 `json:"unsigned"`
+	NotMapped int64
+	unmapped  uint64
+}
+
+func TestBigNumber(t *testing.T) {
+	converter := New()
+	converter.ReplaceBuiltin(reflect.Int64, "string")
+	converter.ReplaceBuiltin(reflect.Uint64, "string")
+	converter.AddType(reflect.TypeOf(BigNumber{}))
+
+	desiredResult := `export class BigNumber {
+    signed: string;
+	unsigned: string;
+
+    static createFrom(source: any) {
+        if ('string' === typeof source) source = JSON.parse(source);
+        const result = new BigNumber();
+        result.signed = source["signed"];
+        result.unsigned = source["unsigned"];
+        return result;
+	}
+
+}`
+
+	testConverter(t, converter, desiredResult)
+}

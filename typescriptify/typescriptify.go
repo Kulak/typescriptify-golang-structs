@@ -94,6 +94,10 @@ func deepFields(typeOf reflect.Type) []reflect.StructField {
 	return fields
 }
 
+func (t *TypeScriptify) ReplaceBuiltin(kind reflect.Kind, tsType string) {
+	t.types[kind] = tsType
+}
+
 func (t *TypeScriptify) Add(obj interface{}) {
 	t.AddType(reflect.TypeOf(obj))
 }
